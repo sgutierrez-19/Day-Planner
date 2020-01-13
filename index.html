@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" />
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css"
+    integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous" />
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans&display=swap" rel="stylesheet" />
+  <!-- <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous"> -->
+  <link rel="stylesheet" href="style.css" />
+  <title>Work Day Scheduler</title>
+</head>
+
+<body>
+  <header class="jumbotron">
+    <h1 class="display-3">Work Day Scheduler</h1>
+    <p class="lead">A simple calendar app for scheduling your work day</p>
+    <p id="currentDay" class="lead"></p>
+  </header>
+  <div class="container main">
+    <!-- Timeblocks go here -->
+
+    <div class="row time-block select" data-time="9">
+      <div class="hour col-1">9 AM</div>
+      <textarea class="col-10 description input-box9" data-hour="09"></textarea>
+      <button class="saveBtn col-1" data-time="9"><i class="far fa-save"></i></button>
+    </div>
+
+    <div class="row time-block select" data-time="10">
+      <div class="hour col-1">10 AM</div>
+      <textarea class="col-10 description input-box10" data-hour="10"></textarea>
+      <button class="saveBtn col-1" data-time="10"><i class="far fa-save"></i></button>
+    </div>
+
+    <div class="row time-block select" data-time="11">
+      <div class="hour col-1">11 AM</div>
+      <textarea class="col-10 description input-box11" data-hour="11"></textarea>
+      <button class="saveBtn col-1" data-time="11"><i class="far fa-save"></i></button>
+    </div>
+
+    <div class="row time-block select" data-time="12">
+      <div class="hour col-1">12 PM</div>
+      <textarea class="col-10 description input-box12" data-hour="12"></textarea>
+      <button class="saveBtn col-1" data-time="12"><i class="far fa-save"></i></button>
+    </div>
+
+    <div class="row time-block select" data-time="1">
+      <div class="hour col-1">1 PM</div>
+      <textarea class="col-10 description input-box1" data-hour="13"></textarea>
+      <button class="saveBtn col-1" data-time="1"><i class="far fa-save"></i></button>
+    </div>
+
+    <div class="row time-block select" data-time="2">
+      <div class="hour col-1">2 PM</div>
+      <textarea class="col-10 description input-box2" data-hour="14"></textarea>
+      <button class="saveBtn col-1" data-time="2"><i class="far fa-save"></i></button>
+    </div>
+
+    <div class="row time-block select" data-time="3">
+      <div class="hour col-1">3 PM</div>
+      <textarea class="col-10 description input-box3" data-hour="15"></textarea>
+      <button class="saveBtn col-1" data-time="3"><i class="far fa-save"></i></button>
+    </div>
+
+    <div class="row time-block select" data-time="4">
+      <div class="hour col-1">4 PM</div>
+      <textarea class="col-10 description input-box4" data-hour="16"></textarea>
+      <button class="saveBtn col-1" data-time="4"><i class="far fa-save"></i></button>
+    </div>
+
+    <div class="row time-block select" data-time="5">
+      <div class="hour col-1 ">5 PM</div>
+      <textarea class="col-10 description input-box5" data-hour="17"></textarea>
+      <button class="saveBtn col-1" data-time="5"><i class="far fa-save"></i></button>
+    </div>
+
+
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
+
+    <script>
+      // sets day & date in header
+      var currentDate = moment().format("dddd MMMM DD, YYYY");
+      $("#currentDay").html(currentDate);
+
+      // variable to get current time
+      var currentTime = moment().format('HH');
+
+      // array for going through the different input boxes for my timeCompare function
+      var arrayNew = [9, 10, 11, 12, 1, 2, 3, 4, 5]
+
+      // calling function (explained below) to set input box colors based off time at page load
+      timeCompare();
+
+      // var todoArray = JSON.parse(localStorage.getItem("Todo")) || [];
+      // console.log(todoArray);
+      // console.log(todoArray[0].time);
+      // if (todoArray !== '') {
+      //   loadPrior()
+      // }
+      // function loadPrior() {
+      //   for (var i = 0; i<9; i++) {
+      //     var number = todoArray[i].time;
+      //     var task = todoArray[i].task;
+      //     $(".input-box" + number).val(task);
+      // } }
+
+      // load in stored text into boxes - tried to make an object to house it but couldn't figure it out
+      var load9 = localStorage.getItem("load9");
+      $(".input-box9").val(load9);
+
+      var load10 = localStorage.getItem("load10");
+      $(".input-box10").val(load10);
+
+      var load11 = localStorage.getItem("load11");
+      $(".input-box11").val(load11);
+
+      var load12 = localStorage.getItem("load12");
+      $(".input-box12").val(load12);
+
+      var load1 = localStorage.getItem("load1");
+      $(".input-box1").val(load1);
+
+      var load2 = localStorage.getItem("load2");
+      $(".input-box2").val(load2);
+
+      var load3 = localStorage.getItem("load3");
+      $(".input-box3").val(load3);
+
+      var load4 = localStorage.getItem("load4");
+      $(".input-box4").val(load4);
+
+      var load5 = localStorage.getItem("load5");
+      $(".input-box5").val(load5);
+
+      // on click for save buttons
+      $(document).on("click", ".saveBtn", clicked);
+
+      // click function to get value of matching text box and save it to local storage
+      function clicked() {
+        var rowTime = $(this).attr("data-time");
+        var insideText = $(".input-box" + rowTime).val();
+        timeCompare()
+        localStorage.setItem("load" + rowTime, insideText);
+      }
+
+      // function to compare the time value of each input box to the current time and color coding appropriately
+      function timeCompare() {
+        for (var i = 0; i < arrayNew.length; i++) {
+          if ($(".input-box" + arrayNew[i]).attr("data-hour") < currentTime) {
+            $(".input-box" + arrayNew[i]).attr("class", "col-10 description input-box" + arrayNew[i] + " past")
+          } else if ($(".input-box" + arrayNew[i]).attr("data-hour") > currentTime) {
+            $(".input-box" + arrayNew[i]).attr("class", "col-10 description input-box" + arrayNew[i] + " future")
+          } else {
+            $(".input-box" + arrayNew[i]).attr("class", "col-10 description input-box" + arrayNew[i] + " present")
+          }
+        }
+      }
+    </script>
+</body>
+
+</html>
